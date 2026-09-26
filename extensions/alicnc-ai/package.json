@@ -1,0 +1,78 @@
+{
+  "name": "alicnc-ai",
+  "displayName": "Ali CNC AI",
+  "description": "Native BYOK AI Assistant powered by LiteLLM, Replicate, and Supabase RAG",
+  "version": "1.0.0",
+  "publisher": "alicnc",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Machine Learning",
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:alicnc-ai.chatView"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "alicnc-ai-container",
+          "title": "Ali CNC AI",
+          "icon": "$(hubot)"
+        }
+      ]
+    },
+    "views": {
+      "alicnc-ai-container": [
+        {
+          "type": "webview",
+          "id": "alicnc-ai.chatView",
+          "name": "Chat"
+        }
+      ]
+    },
+    "configuration": {
+      "type": "object",
+      "title": "Ali CNC AI Settings",
+      "properties": {
+        "alicnc.ai.apiBase": {
+          "type": "string",
+          "default": "http://localhost:4000/v1",
+          "description": "Base URL for the LiteLLM Proxy or direct OpenAI-compatible endpoint."
+        },
+        "alicnc.ai.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Your API Key (LiteLLM, Replicate, OpenAI, etc.)."
+        },
+        "alicnc.ai.model": {
+          "type": "string",
+          "default": "replicate/meta-llama-3-70b-instruct",
+          "description": "The target model to use via LiteLLM routing."
+        },
+        "alicnc.ai.supabaseUrl": {
+          "type": "string",
+          "default": "",
+          "description": "Your Supabase project URL for Workspace RAG."
+        },
+        "alicnc.ai.supabaseKey": {
+          "type": "string",
+          "default": "",
+          "description": "Your Supabase service/anon key."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.138.0",
+    "typescript": "^5.9.3"
+  }
+}
