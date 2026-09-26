@@ -1,0 +1,29 @@
+name: Build Ali CNC Code (Windows)
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Dependencies
+        run: yarn install
+      - name: Build Ali CNC Code (VS Code Fork)
+        run: yarn gulp vscode-win32-x64-archive
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Ali-CNC-Code-Windows
+          path: ../VSCode-win32-x64
+
