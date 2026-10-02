@@ -1,0 +1,78 @@
+{
+  "name": "pstack-ai",
+  "displayName": "PStack AI",
+  "description": "AI Assistant that pulls plugin definitions from Supabase pstack table",
+  "version": "0.1.0",
+  "publisher": "alicnc",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Machine Learning",
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:pstack.ai.chatView"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "pstack-ai-container",
+          "title": "PStack AI",
+          "icon": "$(hubot)"
+        }
+      ]
+    },
+    "views": {
+      "pstack-ai-container": [
+        {
+          "type": "webview",
+          "id": "pstack.ai.chatView",
+          "name": "Chat"
+        }
+      ]
+    },
+    "configuration": {
+      "type": "object",
+      "title": "PStack AI Settings",
+      "properties": {
+        "pstack.ai.apiBase": {
+          "type": "string",
+          "default": "http://localhost:4000/v1",
+          "description": "LiteLLM base URL"
+        },
+        "pstack.ai.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "API Key for LiteLLM/Replicate"
+        },
+        "pstack.ai.model": {
+          "type": "string",
+          "default": "replicate/meta-llama-3-70b-instruct",
+          "description": "Model identifier"
+        },
+        "pstack.ai.supabaseUrl": {
+          "type": "string",
+          "default": "",
+          "description": "Supabase project URL"
+        },
+        "pstack.ai.supabaseKey": {
+          "type": "string",
+          "default": "",
+          "description": "Supabase service key"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}
